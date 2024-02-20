@@ -1,0 +1,69 @@
+body,html{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:beige;
+}
+
+.navbar{
+    background: rgb(72, 35, 128);
+    height: 80px;
+}
+
+.navbar-flex{
+    position: relative;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-name{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.index{
+    margin: 40px 250px 0 250px;
+    display: grid;
+    grid-column: auto;
+    gap: 10px;
+    justify-content: stretch;
+}
+
+a{
+    text-decoration: none;
+}
+
+.card{
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(72, 35, 128);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 72px;
+    cursor: pointer;
+    transition: transform 0.25s;
+}
+
+    .card:hover{
+        transform:scale(1.02);
+    }
+
+.card-name{
+    color: rgb(72, 35, 128);
+    background-color:beige;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0 40px;
+    height: 72px;
+    font-weight: bold;
+    font-size: 24px;
+    transition: background-color 0.25s, color 0.25s;
+}
+
+    .card-name:hover{
+        color:beige;
+        background-color: rgb(72, 35, 128);
+    }

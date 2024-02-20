@@ -1,0 +1,84 @@
+body,html{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:beige;
+}
+
+.navbar{
+    background: rgb(72, 35, 128);
+    height: 80px;
+}
+
+.navbar-flex{
+    position: relative;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-name{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.meta{
+    margin: 40px 250px 0;
+}
+
+.meta h1{
+    font-size: 32px;
+}
+
+.content{
+    margin: 40px 250px 0;
+}
+
+.figure{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.figures img{
+    width: 100%;
+}
+
+.houses{
+    display: grid;
+    grid-column: auto;
+    gap: 10px;
+}
+
+.house{
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(72, 35, 128);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 20px 40px;
+}
+
+.back{
+    display: inline-block;
+    padding: 20px 0;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 16px;
+    border: 2px solid rgb(72, 35, 128);
+    border-radius: 8px; 
+    background-color: beige; 
+    color: rgb(72, 35, 128); 
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.25s, background-color 0.25s, color 0.25s;
+}
+
+.back:hover {
+    background-color: rgb(72, 35, 128);
+    color: beige;
+    transform: scale(1.02);
+}

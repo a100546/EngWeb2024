@@ -14,12 +14,14 @@
         </uc>
     </meta>
     <resumo>
-        <p>Primeiro parágrafo</p>
-        <p>Segundo parágrafo</p>
-        <p>Terceiro parágrafo com <url>link</url><texto>url embutido</texto></p>
+        <p>Objetivo: O objetivo principal deste trabalho é desenvolver uma página HTML que permite aos utilizadores consultar e navegar num índice de 60 ruas de Braga.</p>
+        <p>Material: O material fornecido para este projeto inclui um ficheiro XML contendo informações sobre as 60 ruas de Braga, bem como fotos atuais associadas a uma determinada vista e fotos dos esboços desenhados no século XVIII das mesmas ruas. Estas informações podem ser encontradas na pasta fornecida <url href="https://epl.di.uminho.pt/~jcr/AULAS/EngWeb2024/semana1/MapaRuas-materialBase.zip">aqui</url></p>
+        <p>Tópicos a ter em consideração:<lista>A página deve apresentar um índice das ruas ordenadas alfabeticamente</lista><lista>Cada rua deve ter uma hiperligação para uma página individual própria com as suas informações</lista><lista>As informações da página individual são obtidas através dos materiais mencionados em cima</lista><lista>Cada página individual deverá ter uma hiperligação para voltar à página principal</lista><lista>Cada página terá uma estilização básica</lista></p>
     </resumo>
     <resultados>
-        <resultado>resultado 1</resultado>
-        <resultado>resultado 2</resultado>
+        <resultado>Página criada com sucesso</resultado>
+        <resultado>Página ordenada alfabeticamente com respetivas hiperligações para página individual</resultado>
+        <resultado>Botão de voltar implementado com sucesso</resultado>
+        <resultado>Estilização básica implementada</resultado>
     </resultados>
 </doc>
