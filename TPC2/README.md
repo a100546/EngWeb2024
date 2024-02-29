@@ -30,6 +30,8 @@
 - Servidor Node.js implementado com sucesso
 - Website 100% operacional
 
+De modo a conseguir controlar melhor o dataset modifiquei o nome do campo  `#text` para `text` em todas as instâncias do dataset. 
+
 ## Como utilizar?
 
 De modo a obter o website a partir do dataset e do servidor Node.js será necessário fazer os seguintes passos:
