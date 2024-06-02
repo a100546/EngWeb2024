@@ -64,7 +64,13 @@ var compositoresServer = http.createServer((req, res) => {
                         res.write("<p>Não foi possível obter informação do compositor " + id +": " + erro + "</p>")
                         res.end()
                     })
-                } 
+                }
+                // Página de adicionar um compositor
+                else if (req.url == "/compositores/adicionar") {
+                    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+                    res.write(templates.compositorAddPage())
+                    res.end()
+                }  
                 //Página de editar um compositor
                 else if (/\/compositores\/editar\/C\d+$/.test(req.url)) {
                     id = req.url.split('/')[3]
@@ -95,12 +101,6 @@ var compositoresServer = http.createServer((req, res) => {
                         res.end()
                     })
                 } 
-                // Página de adicionar um compositor
-                else if (req.url == "/compositores/adicionar") {
-                    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-                    res.write(templates.compositorAddPage())
-                    res.end()
-                } 
                 // Lista dos períodos
                 else if (req.url == "/periodos") {
                     axios.get('http://localhost:3000/periodos?_sort=nome')
@@ -115,12 +115,6 @@ var compositoresServer = http.createServer((req, res) => {
                         res.end()
                     })
                 } 
-                // Adicionar um período
-                else if (req.url == "/periodos/adicionar") {
-                    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-                    res.write(templates.periodoAddPage())
-                    res.end()
-                }
                 // Página de um período
                 else if (/\/periodos\/\w+$/.test(req.url)) {
                     id = req.url.split('/')[2]
@@ -137,6 +131,12 @@ var compositoresServer = http.createServer((req, res) => {
                             res.end()
                         })
                 }
+                // Adicionar um período
+                else if (req.url == "/periodos/adicionar") {
+                    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+                    res.write(templates.periodoAddPage())
+                    res.end()
+                }
                 // Caso de get erro
                 else {
                     res.writeHead(506, { 'Content-Type': 'text/html; charset=utf-8' })
@@ -146,7 +146,7 @@ var compositoresServer = http.createServer((req, res) => {
                 break
 
             case 'POST':
-                // Post do editar compositor
+                // Post de editar um compositor
                 if (/\/compositores\/editar\/C\d+$/.test(req.url)) {
                     collectRequestBodyData(req, result => {
                         if (result){
@@ -168,7 +168,7 @@ var compositoresServer = http.createServer((req, res) => {
                         }
                     })
                 }
-                //Post de adicionar compositor
+                //Post de adicionar um compositor
                 else if (req.url == "/compositores/adicionar") {
                     collectRequestBodyData(req, result => {
                         if (result){
@@ -190,7 +190,7 @@ var compositoresServer = http.createServer((req, res) => {
                         }
                     })
                 }
-                //Post de adicionar periodo
+                //Post de adicionar um periodo
                 else if (req.url == "/periodos/adicionar") {
                     collectRequestBodyData(req, result => {
                         if (result){

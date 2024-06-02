@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .w3-pale-yellow
+    .w3-card-4
+        header.w3-container.w3-brown.w3-center
+            h1 #{title}
+        .w3-container.w3-center
+            a(href='/compositores', style='text-decoration: none;font-size: 35px;font-weight: bold')
+                .w3-panel.w3-round-xlarge.w3-khaki.w3-center(style='margin: 70px;padding: 70px 0') Compositores
+            a(href='/periodos', style='text-decoration: none;font-size: 34px;font-weight: bold')
+                .w3-panel.w3-round-xlarge.w3-khaki.w3-center(style='margin: 70px;padding: 70px 0') Períodos
+        footer.w3-container.w3-dark-gray.w3-center
+            h5
+                i Gerado por Tomás Sousa
+

@@ -1,0 +1,32 @@
+extends layout 
+
+block content 
+    .w3-pale-yellow
+        .w3-card-4
+            header.w3-container.w3-brown.w3-center
+                h1 #{title}
+            .w3-container
+                p.w3-panel.w3-leftbar
+                    b ID:
+                    |  #{compositor.id}
+                hr
+                p.w3-panel.w3-leftbar
+                    b Biografia:
+                    |  #{compositor.bio}
+                hr
+                p.w3-panel.w3-leftbar
+                    b Data de nascimento:
+                    |  #{compositor.dataNasc}
+                hr
+                p.w3-panel.w3-leftbar
+                    b Data de óbito:
+                    |  #{compositor.dataObito}
+                hr
+                p.w3-panel.w3-leftbar
+                    b Período:
+                    a(href=`/periodos/${compositor.periodo}`)= compositor.periodo
+            div
+                a.w3-btn.w3-brown(style='position:fixed; bottom: 25px; right: 25px', href='/compositores') Voltar à lista de Compositores
+            footer.w3-container.w3-dark-gray.w3-center
+                h5
+                    i Gerado por Tomás Sousa

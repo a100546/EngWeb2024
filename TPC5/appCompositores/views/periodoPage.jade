@@ -1,0 +1,19 @@
+extends layout 
+
+block content 
+    .w3-pale-yellow
+        .w3-card-4
+            header.w3-container.w3-brown.w3-center
+                h1 Período #{periodo}
+            .w3-container
+                p.w3-panel.w3-leftbar
+                    b Compositores:
+                ul
+                    - for (let i = 0; i < compositores.length; i++)
+                        li
+                            a(href=`/compositores/${compositores[i].id}`)= compositores[i].nome
+            div
+                a.w3-btn.w3-brown(style='position:fixed; bottom: 25px; right: 25px', href='/periodos') Voltar à lista de Períodos
+            footer.w3-container.w3-dark-gray.w3-center
+                h5
+                    i Gerado por Tomás Sousa

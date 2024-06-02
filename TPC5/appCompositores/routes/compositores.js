@@ -2,103 +2,119 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  axios.get("http://localhost:3000/alunos?_sort=nome")
+
+// GET - Lista de compositores
+router.get('/', function (req, res, next) {
+  axios.get('http://localhost:3000/compositores?_sort=nome')
     .then(resp => {
-      alunos = resp.data
-      alunos.forEach(element => {
-        let sum = 0
-        for(const [key, value] of Object.entries(element)){
-          if(key.startsWith("tpc")){
-            sum += parseInt(value)
-          }
-        }
-        element.tpcTotal = sum
-        teste = parseFloat(element.teste)
-        pratica = parseFloat(element.pratica)
-        if(teste>10 && pratica>10){
-          element.final = teste*.45+pratica*.35+(element.tpcTotal*20/8)*.2
-        } else {
-          element.final = "R"
-        }
-      });
-      res.status(200).render("studentsListPage", {"lAlunos": alunos, "date": d})
-      res.end()
+      res.status(200).render('compositoresListPage', { title : "Compositores", compositores : resp.data })
     })
     .catch(erro => {
-      res.status(501).render("error",{"error":erro})
+      res.status(501).render('error', { error: erro })
     })
-}); 
+})
 
-router.get('/registo', function(req, res, next) {
-  var d = new Date().toISOString().substring(0,16)
-  res.status(200).render("studentFormPage", {"date": d})
-}); 
-
-router.post('/registo', function(req, res, next) {
-  var d = new Date().toISOString().substring(0,16)
-  result = req.body
-  axios.post("http://localhost:3000/alunos", result)
-      .then(resp => {
-        res.redirect("/")
-      })
-      .catch(erro => {
-        res.status(502).render("error",{"error":erro})
-      })
-}); 
-
-router.get('/:idAluno', function(req, res, next) {
-  var d = new Date().toISOString().substring(0,16)
-  var id = req.params.idAluno
-  axios.get("http://localhost:3000/alunos/" + id)
+// GET - Editar Compositor
+router.get('/editar/:id', function (req, res, next) {
+  axios.get('http://localhost:3000/compositores/' + req.params.id)
     .then(resp => {
-      aluno = resp.data
-      res.status(200).render("studentPage", {"aluno": aluno, "date": d})
-      res.end()
+      res.status(200).render('compositorEditPage', { title : "Editar Compositor", compositor : resp.data })
     })
     .catch(erro => {
-      res.status(503).render("error",{"error":erro})
+      res.status(503).render('error', { error: erro })
     })
-}); 
+})
 
-router.get('/edit/:idAluno', function(req, res, next) {
-  var d = new Date().toISOString().substring(0,16)
-  var id = req.params.idAluno
-  axios.get("http://localhost:3000/alunos/" + id)
+// GET - Adicionar Compositor
+router.get('/adicionar', function (req, res, next) {
+  res.status(200).render('compositorAddPage', { title: "Novo Compositor" })
+})
+
+// GET Apagar Compositor 
+router.get('/eliminar/:id', function (req, res, next) {
+  axios.delete('http://localhost:3000/compositores/' + req.params.id)
     .then(resp => {
-      aluno = resp.data
-      res.status(200).render("studentFormEditPage", {"aluno": aluno, "date": d})
-      res.end()
+      res.status(200).redirect('/compositores')
     })
     .catch(erro => {
-      res.status(504).render("error",{"error":erro})
+      res.status(512).render('error', { error: erro })
     })
-}); 
+})
 
-router.post('/edit/:idAluno', function(req, res, next) {
-  var d = new Date().toISOString().substring(0,16)
-  var aluno = req.body
-  axios.put("http://localhost:3000/alunos/" + aluno.id,aluno)
+// GET - Página do Compositor
+router.get('/:id', function (req, res, next) {
+  axios.get('http://localhost:3000/compositores/' + req.params.id)
     .then(resp => {
-      res.redirect("/")
+      res.status(200).render('compositorPage', { title : resp.data.nome, compositor : resp.data })
+    }).catch(erro => {
+      res.status(502).render('error', { error: erro })
+    })
+})
+
+// POST - Editar Compositor
+router.post('/editar/:id', function (req, res, next) {
+  axios.get('http://localhost:3000/periodos?id=' + req.body.periodo)
+    .then(resp => {
+      if (resp.data != "") {
+        axios.put('http://localhost:3000/compositores/' + req.params.id, req.body)
+          .then(resp => {
+            res.status(200).redirect('/compositores/' + req.params.id)
+          })
+          .catch(erro => {
+            res.status(504).render('error', { error: erro })
+          })
+      } else {
+        axios.post('http://localhost:3000/periodos', { "id": req.body.periodo })
+          .then(resp => {
+            axios.put('http://localhost:3000/compositores/' + req.params.id, req.body)
+              .then(resp => {
+                res.status(200).redirect('/compositores/' + req.params.id)
+              })
+              .catch(erro => {
+                res.status(505).render('error', { error: erro })
+              })
+          })
+          .catch(erro => {
+            res.status(506).render('error', { error: erro })
+          })
+      }
     })
     .catch(erro => {
-      res.status(505).render("error",{"error":erro})
+      res.status(507).render('error', { error: erro })
     })
-});
+})
 
-router.get('/delete/:idAluno', function(req, res, next) {
-  var d = new Date().toISOString().substring(0,16)
-  var id = req.params.idAluno
-  axios.delete("http://localhost:3000/alunos/" + id)
+// POST - Adicionar Compositor
+router.post('/adicionar', function (req, res, next) {
+  axios.get('http://localhost:3000/periodos?id=' + req.body.periodo)
     .then(resp => {
-      res.redirect("/")
+      if (resp.data != "") {
+        axios.post('http://localhost:3000/compositores', req.body)
+          .then(resp => {
+            res.status(200).redirect('/compositores/' + req.body.id)
+          })
+          .catch(erro => {
+            res.status(508).render('error', { error: erro })
+          })
+      } else {
+        axios.post('http://localhost:3000/periodos', { "id": req.body.periodo })
+          .then(resp => {
+            axios.post('http://localhost:3000/compositores', req.body)
+              .then(resp => {
+                res.status(200).redirect('/compositores/' + req.body.id)
+              })
+              .catch(erro => {
+                res.status(509).render('error', { error: erro })
+              })
+          })
+          .catch(erro => {
+            res.status(510).render('error', { error: erro })
+          })
+      }
     })
     .catch(erro => {
-      res.status(506).render("error",{"error":erro})
+      res.status(511).render('error', { error: erro })
     })
-}); 
+})
 
 module.exports = router;
- 

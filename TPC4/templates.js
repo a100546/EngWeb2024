@@ -1,4 +1,4 @@
-exports.indexPage = function () {
+exports.indexPage = function () { 
     return `
     <!DOCTYPE html>
     <html>
@@ -313,7 +313,7 @@ exports.periodoAddPage = function (d) {
         <link rel="stylesheet" href="w3.css"/>
         <title>Novo Período</title>
     </head>
-    <body>
+    <body class="w3-pale-yellow">
         <div class="w3-card-4">
             <header class="w3-container w3-brown w3-center">
                 <h1>Novo Período</h1>
